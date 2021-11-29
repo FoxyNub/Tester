@@ -1,0 +1,27 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("FoxyHub | beta version", "GrapeTheme")
+
+--Main
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("MaIin")
+MainSection:NewToggle("Auto Click", "auto clicking", function(v)
+    getgenv().autoclick = v
+    while true do
+        if not getgenv().autoclick then return end
+        local Event = game:GetService("ReplicatedStorage").Remotes.Events.Tap
+        Event:FireServer()
+        wait(0.01)
+    end
+end)
+        
+
+
+--Player
+local Player = Window:NewTab("Player")
+local PlayerSection = Player:NewSection("Player")
+PlayerSection:NewSlider("Walk Speed", "Changes your walk speed", 500, 24, function(v)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+end)
+PlayerSection:NewSlider("Jump Power", "Changes your jump power", 250, 50, function(v) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
+end)
